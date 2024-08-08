@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn/SignUp Form</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to right bottom, #76fd55, #4fffbb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-box{
+            width: 50%;
+            max-width: 400px;
+            background: url(Hadiths\ pics/background.jpg) no-repeat center center/ cover;
+            color: #fff;
+            border-radius: 24px;
+            box-shadow: 0 0 22px black;
+            padding: 20px;
+            margin-inline: 20px;
+        }
+
+        .form-box header h1{
+            text-align: center;
+            color: #fff;
+            font-size: 2rem;
+            text-shadow: 0 2px 12px white;
+        }
+
+        .form-box form{
+            margin: 24px;
+        }
+
+        input{
+            width: 100%;
+            margin: 12px 0;
+            padding: 18px 16px;
+            border: 1px solid #fff;
+            border-radius: 12px;
+            font-size: 16px; 
+            transition: .4s;   
+        }
+
+        input:hover{
+            border: none;
+            background-color: #cac8c85a;
+            color: #fff;
+        }
+
+        input:hover::placeholder{
+            color: #fff;
+        }
+
+        input[type="text"]{
+            display: none;
+        }
+
+        a{
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        a:hover{
+            color: red;
+            text-decoration: underline;
+        }
+
+        input[type="button"]{
+            font-size: 1.4rem;
+            font-weight: 600;
+            transition: .5s ease;
+        }
+
+        input[type="button"]:hover{
+            border: 2px solid #fff;
+            cursor: pointer;
+        }
+
+        .links{
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+            margin-left: 46px;
+        }
+
+        .signup{
+            margin-top: 12px;
+            text-align: center;
+            font-size: 1.2rem;     
+        }
+
+        .hvr:hover{
+            color: #76fd55;
+            text-decoration: underline;
+        }
+
+        /*Responsive CSS*/
+        @media screen and (max-width: 700px) {
+            .form-box{
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <header>
+                <h1 id="tittle">Login</h1>
+            </header>
+
+            <form action="">
+                <input type="text" placeholder="Name" id="nameField" required>
+                <input type="email" placeholder="UserName or Password" required>
+                <input type="password" placeholder="password" required>
+
+                <a href="">Forgot Password?</a>
+                <input type="button" value="LogIn" id="loginBtn">
+
+                <div class="links">
+                    <a href="https://www.facebook.com/"><img src="Hadiths pics/icons8-facebook-48.png" alt=""></a>
+                    <a href="https://www.twitter.com/"><img src="Hadiths pics/icons8-twitterx-50.png" alt=""></a>
+                    <a href="https://www.instagram.com/"><img src="Hadiths pics/icons8-instagram-48.png" alt=""></a>
+                </div>
+
+                <p class="signup">Not a member? <a href="#" class="hvr" id="signupBtn">SignUp</a></p>
+            </form>
+        </div>
+    </div>    
+
+    <script>
+
+        const tittle = document.getElementById('tittle');
+        const namaeFeild = document.getElementById('nameField');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+
+        signupBtn.onclick = function(){
+            tittle.innerHTML = "Sign Up";
+            namaeFeild.style.display = "block";
+        }
+        
+        loginBtn.onclick = function(){
+            tittle.innerHTML = "Login";
+            namaeFeild.style.display = "none";
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        body{
+            background: rgba(0, 0, 0, 0.502);
+        }
+
+        header nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background-color: #334155;
+        }
+
+        .logo img{
+            width: 160px; 
+            height: 60px;
+        }
+
+        ul{
+            display: flex;
+            justify-content: space-between;
+            flex-basis: 44%;
+            margin-right: 28px;
+        }
+        
+        ul li{
+            list-style-type: none;
+        }
+
+        ul li a{
+            font-size: 1.3rem;
+            text-decoration: none;
+        }
+
+        ul li:not(:last-child) a:hover{ /* the not property will work on only the parameter given */
+            text-decoration: underline 2px;
+            text-underline-offset: 4px;
+            color: #4ca8e1;
+            text-decoration-color: #fff;
+        }
+
+        .btn{
+            font-weight: 700;
+            padding: 8px 20px;
+            border: none;
+            background: #4ca8e1;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .btn:hover{
+            background-color: #0091ff;
+        }
+
+        .hamburger{
+            font-size: 30px;
+            display: none;
+        }
+
+        @media screen and (max-width:1024px) {
+            .hamburger{
+                display: flex;
+                cursor: pointer;
+            }
+
+            ul{
+                display: none;
+            }
+
+            .hamburger_Active{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                height: 320px;
+                gap: 24px;
+                background-color: #30363f;
+               
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header> <!--sementic tags-->
+        <nav>
+            <div class="logo">
+                <img src="Hadiths pics/navigationBar.png" alt="">
+            </div>
+
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" class="btn">Login</a></li>
+            </ul>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <script src="https://kit.fontawesome.com/7c6d6ac861.js" crossorigin="anonymous"></script>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const ul = document.querySelector('ul');
+
+        hamburger.addEventListener('click', ()=> {
+            ul.classList.toggle('hamburger_Active');
+
+            let hamburger_Child = hamburger.firstElementChild;
+            if(ul.classList.contains('hamburger_Active')){
+                hamburger_Child.classList.replace('fa-bars', 'fa-xmark');
+            }else{
+                hamburger_Child.classList.replace('fa-xmark', 'fa-bars');
+            }
+        });
+        
+    </script>
+</body>
+</html>

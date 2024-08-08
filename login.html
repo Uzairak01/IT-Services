@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif ;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url(imgs/windows-11.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            background: transparent;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: #fff;
+            user-select: none;
+        }
+
+        .navigation a {
+            position: relative;
+            font-size: 1.1em;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+
+        .navigation a:hover::after {
+            transform-origin: left  ;
+            transform:scaleX(1);
+
+        } 
+
+        .navigation .button-popup {
+            width: 130px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #fff;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color:#fff;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .navigation .button-popup:hover {
+            background: #fff;
+            color: black;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 400px;
+            height: 440px;
+            background: transparent;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(253, 253, 253, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; 
+            transform: scale(0);
+            transition: transform 0.5s ease, height 0.2s ease;
+        }
+
+        .wrapper.active {
+            height: 520px;
+
+        }
+
+        .wrapper.active-popup {
+            transform: scale(1);
+        }
+
+
+        .wrapper .form-box {
+            width: 100%;
+            padding: 40px;
+        }
+
+        .wrapper .form-box.Login {
+           transition: transform 0.18s ease;
+           transform: translateX(0);
+        }
+
+        .wrapper.active .form-box.Login {
+            transition: none;
+            transform: translateX(-400px);
+        } 
+
+        .wrapper .form-box.register {
+            position: absolute;
+            transform: translateX(400px);
+        }
+
+        .wrapper.active .form-box.register {
+           transition: transform 0.18s ease;
+           transform: translateX(0);
+        }
+
+        .wrapper .icon-close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45px;
+            height: 45px;
+            border-bottom-left-radius: 10px;
+            background: #ddebf6;
+            color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .form-box h2 {
+            font-size: 2em;
+            color: #e2e8ed;
+            text-align: center;
+        }
+
+        .input-box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            border-bottom: 2px solid #d6e2eb;
+            margin: 30px 0;
+        }
+
+        .input-box label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
+            font-size: 1em;
+            color: #ddebf6;
+            font-weight: 500;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+
+        .input-box input:focus~label,
+        .input-box input:valid~label {
+            top: -5px;
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            color: #d6e2eb;
+            font-weight: 600;
+            padding: 0 35px 0 5px;
+        }
+
+        .input-box .icon {
+            position: absolute;
+            right: 8px;
+            font-size: 1.2em;
+            color: #d6e2eb;
+            line-height: 57px;
+        }
+
+        .remember-forgot {
+            font-size: 0.9em;
+            color: #d6e2eb;
+            font-weight: 500;
+            margin: -15px 0 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .remember-forgot label input {
+            accent-color: #d6e2eb;
+            margin-right: 5px;
+        }
+
+        .remember-forgot a {
+            color: #d6e2eb;
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            height: 45px;
+            background: #ddebf6;
+            border: none;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .login-registration {
+            font-size: 0.9em;
+            color: #d6e2eb;
+            text-align: center;
+            font-weight: 500;
+            margin: 25px 0 10px;
+        }
+
+        .login-registration p a {
+            color: #d6e2eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-registration p a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <header>
+
+        <h2 class="logo">YOUR LOGO</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+            <button class="button-popup">Login</button>
+        </nav>
+
+    </header>
+
+    <div class="wrapper">
+        <span class="icon-close">✖️</span>
+
+        <div class="form-box Login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon">✉️</span>
+                    <input type="email" required>
+                    <label for="">Email</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">🔒</span>
+                    <input type="password" required>
+                    <label for="">password</label>
+                </div>
+
+                <div class="remember-forgot">
+                    <label for=""><input type="checkbox">Remember me</label>
+                    <a href="#">Forgot Password</a>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+
+                <div class="login-registration">
+                    <p>Dont have an account?<a href="#" class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon">🙎🏻</span>
+                    <input type="text" required>
+                    <label for="">Username</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">✉️</span>
+                    <input type="email" required>
+                    <label for="">Email</label>
+                </div>
+        
+                <div class="input-box">
+                    <span class="icon">🔒</span>
+                    <input type="password" required>
+                    <label for="">password</label>
+                </div>
+        
+                <div class="remember-forgot">
+                    <label for=""><input type="checkbox">I agree to the terms & conditions</label>
+                    <a href="#">Forgot Password</a>
+                </div>
+        
+                <button type="submit" class="btn">Register</button>
+        
+                <div class="login-registration">
+                    <p>Already have an account?<a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+
+            const wrapper = document.querySelector('.wrapper');
+            const loginLink = document.querySelector('.login-link');
+            const registerLink = document.querySelector('.register-link');
+            const btnPopup = document.querySelector('.button-popup');
+            const iconClose = document.querySelector('.icon-close');
+
+            registerLink.addEventListener('click', () => {wrapper.classList.add('active');});
+
+            loginLink.addEventListener('click', () => {wrapper.classList.remove('active');});
+
+            btnPopup.addEventListener('click', () => {wrapper.classList.add('active-popup');});
+
+            iconClose.addEventListener('click', () => {wrapper.classList.remove('active-popup');});
+
+    </script>
+</body>
+</html>

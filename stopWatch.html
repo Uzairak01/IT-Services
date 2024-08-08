@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 100vh;
+            background: url(Hadiths\ pics/background4.jpeg)no-repeat center center/ cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            width: 40%;
+            height: 250px;
+            background: rgb(178, 251, 247);
+            border-radius: 32px;
+            box-shadow: 0 0 8px;
+        }
+
+        #timer{
+            width: 100%;
+            height: 120px;
+            font-size: 82px;
+            margin: 12px auto;
+            text-align: center;
+            padding: 32px;
+        }
+
+        .buttons {
+            text-align: center;
+        }
+
+        button {
+            margin: 12px;
+            padding: 12px;
+            border: 2px solid white;
+            border-radius: 12px;
+            box-shadow: 0 0 8px;
+            cursor: pointer;
+            background-color: rgb(154, 216, 248);
+            font-size: 22px;
+            transition: transform .3s ease;
+        }
+
+        button:hover{
+            transform: scale(1.1);
+            background-color: #fff;
+            border: 2px solid #fff;
+        }
+
+        button i{
+            color: #fff;
+        }
+
+        #play{
+            color: green;
+        }
+        #pause{
+            color: orange;
+        }
+        #reset{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div id="timer">
+            00:00:00
+        </div>
+
+        <div class="buttons">
+            <button id="startStopBtn">
+                <i class="fa-solid fa fa-play" id="play"></i>
+            </button>
+
+            <button id="resetBtn">
+                <i class="fa-solid fa fa-refresh" id="reset"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // variables for btn
+        const startStopBtn = document.querySelector('#startStopBtn');
+        const resetBtn = document.querySelector('#resetBtn');
+
+        // variables for time
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+        // variables for leading zeros
+        let leadingSeconds = 0;
+        let leadingMinutes = 0;
+        let leadingHours = 0;
+
+        // variables for set interval & timestatus
+        let timeInterval = null;
+        let timeStatus = "sropped";
+
+        // stop watch function
+        function stopWatch(){
+
+            seconds++
+            if(seconds / 60 === 1){
+                seconds = 0;
+                minutes++;
+
+                if(minutes / 60 === 1){
+                    minutes = 0;
+                    hours++;
+                }
+            }
+
+            if(seconds < 10){
+                leadingSeconds = "0" + seconds.toString();
+            } else {
+                leadingSeconds = seconds;
+            }
+            if(minutes < 10){
+                leadingMinutes = "0" + minutes.toString();
+            } else { 
+                leadingMinutes = minutes;
+            }
+            if(hours < 10){
+                leadingHours = "0" + hours.toString();
+            } else {
+                leadingHours = hours;
+            }
+
+            let displayTimer = document.getElementById('timer').innerText = leadingHours + ":" + leadingMinutes + ":" + leadingSeconds;
+        }
+
+        startStopBtn.addEventListener('click', function(){
+
+            if(timeStatus === "stopped"){
+                timeInterval = window.setInterval(stopWatch, 1000);
+                document.getElementById('startStopBtn').innerHTML = `<i class="fa-solid fa fa-pause" id="pause"></i>`;
+                timeStatus = "started";
+            } else {
+                window.clearInterval(timeInterval);
+                document.getElementById('startStopBtn').innerHTML = `<i class="fa-solid fa fa-play" id="play"></i>`;
+                timeStatus = "stopped";
+            }
+        });
+
+        resetBtn.addEventListener('click', function(){
+
+            window.clearInterval(timeInterval);
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            document.getElementById('timer').innerHTML = '00:00:00';
+        });
+
+    </script>
+</body>
+</html>

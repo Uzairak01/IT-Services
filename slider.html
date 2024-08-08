@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif ;
+            background-color: black;
+            color: white;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        header {
+            width: 1140px;
+            max-width: 80%;
+            margin: auto;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 99;
+        }
+
+        header  a {
+            margin-right: 40px;
+        }
+
+       /* header h2 .logo {
+            
+        }*/
+        /*Carousel css*/
+        .carousel {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: -50px;
+        }
+
+        .carousel .list .items {
+            position: absolute;
+            inset: 0 0 0 0;
+        }
+
+        .carousel .list .items img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel .list .items .content {
+            position: absolute;
+            top: 20%;
+            width: 1440px;
+            max-width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-right: 30%;
+            box-sizing: border-box;
+            color: white;
+            text-shadow: 0 5px 10px black;
+        }
+
+        .carousel .list .items .content .author {
+            font-weight: bold;
+            letter-spacing: 8px;
+        }
+
+        .carousel .list .items .content .title,
+        .carousel .list .items .content .topic {
+            font-weight: bold;
+            font-size: 5em;
+            list-style: 1.3em;
+        }
+
+        .carousel .list .items .content .topic {
+            color: orange;
+        }
+
+        .carousel .list .items .content .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 130px);
+            grid-template-rows: 40px;
+            gap: 5px;
+            margin-top: 20px;
+        }
+
+        .carousel .list .items .content .buttons {
+            border: none;
+            border-radius: 3px;
+            background-color: white;
+            letter-spacing: 3px;
+            font-family: 'Poppins';
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .carousel .list .items .content button:nth-child(2) {
+            background-color: transparent;
+            color: aliceblue;
+            border: 1px solid white;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /*thumbnail css*/
+        .thumbnail {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            width: max-content;
+            z-index: 100;
+            display: flex;
+            gap: 20px;
+        }
+
+        .thumbnail .item {
+            width: 150px;
+            height: 220px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .thumbnail .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .thumbnail .item .content {
+            position: absolute;
+            bottom: 10xp;
+            left: 10px;
+            right: 10px;
+        }
+
+        .thumbnail .item .content .title {
+            font-weight: bold;
+        }
+
+        /*arrows*/
+        .arrows {
+            position: absolute;
+            top: 80%;
+            right: 52%;
+            width: 300px;
+            max-width: 30%;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .arrows button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee4;
+            border: none;
+            font-family: monospace;
+            color: #fff;
+            font-weight: bold;
+            font-size: large;
+            cursor: pointer;
+            transition: 0.5s;
+            z-index: 100;
+        }
+
+        .arrows button:hover {
+            background-color: #fff;
+            color: #555;
+        }
+
+        .carousel .list .items:nth-child(1) {
+            z-index: 1;
+        }
+
+        .carousel .list .items:nth-child(1) .author
+        .carousel .list .items:nth-child(1) .title
+        .carousel .list .items:nth-child(1) .topic
+        .carousel .list .items:nth-child(1) .des
+        .carousel .list .items:nth-child(1) .buttons {
+            transform: translateY(50px);
+            filter: blur(20px);
+            opacity: 0;
+            animation: showContent 0.5s 1s linear 1 forwards;
+        }
+
+        @keyframes showContent {
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        .carousel .list .items:nth-child(1) .title {
+            animation-delay: 1.2s;
+        }
+
+        .carousel .list .items:nth-child(1) .topic {
+            animation-delay: 1.4s;
+        }
+
+        .carousel .list .items:nth-child(1) .des {
+            animation-delay: 1.6s;
+        }
+
+        .carousel .list .items:nth-child(1) .buttons {
+            animation-delay: 1.8s;
+        }
+
+        /*carousel next*/
+        .carousel.next .list .items:nth-child(1) img {
+            width: 150px;
+            height: 220px;
+            position: absolute;
+            left: 50%;
+            bottom: 50px;
+            border-radius: 20px;
+            animation: showImage 0.5s linear 1 forwards;
+        }
+
+        @keyframes showImage {
+            to{
+                width: 100%;
+                height: 100%;
+                left: 0;
+                bottom: 0;
+                border-radius: 0;
+            }
+        }
+
+        .carousel.next .thumbnail .item:nth-child(1) {
+            width: 0;
+            overflow: hidden;
+            animation: showThumbnail 0.5s linear 1 forwards;
+        }
+
+        @keyframes showThumbnail {
+            to{
+                width: 150px;
+            }
+        }
+
+        .carousel.next .thumbnail {
+            transform: translateX(150px);
+            animation: transformThumbnail 0.5s linear 1 forwards;
+        }
+
+        @keyframes transformThumbnail {
+            to{
+                transform: translateX(0);
+            }
+        }
+
+        /*carousel previous */
+        .carousel.prev .list .items:nth-child(2) {
+            z-index: 2;
+        }
+
+        .carousel.prev .list .item:nth-child(2) img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            animation: outImage 0.5s linear1 forwards;
+        }
+
+        @keyframes outImage {
+            to{
+                width: 150px;
+                height: 220px;
+                border-radius: 20px;
+                left: 50%;
+                bottom: 50px;
+            }
+        }
+
+        .carousel.prev .thumbnail .item:nth-child(1) {
+            width: 0;
+            overflow: hidden;
+            opacity: 0;
+            animation: showThumbnail 0.5s linear 1 forwards; 
+        }
+
+        .carousel.prev .list .item:nth-child(2) .author 
+        .carousel.prev .list .item:nth-child(2) .title
+        .carousel.prev .list .item:nth-child(2) .topic
+        .carousel.prev .list .item:nth-child(2) .dis
+        .carousel.prev .list .item:nth-child(2) .buttons {
+            animation: contentOut 1.5s linear 1 forwards;
+        }
+
+        @keyframes contentOut {
+            to{
+                transform: translateY(-150px);
+                filter: blur(20px);
+                opacity: 0;
+            }
+        }
+
+        .carousel.next .arrows button,
+        .carousel.prev .arrows button {
+            pointer-events: none;
+        }
+
+        .time {
+            width: 0;
+            height: 5px;
+            background-color: orange;
+            position: absolute;
+            z-index: 100;
+            top: 0;
+            left: 0;
+        }
+
+        .carousel.next .time,
+        .carousel.prev .time {
+            width: 100%;
+            animation: timeRunning 2s linear 1 forwards;
+        }
+
+        @keyframes timeRunning {
+            to{
+                width: 0;   
+            }
+        }
+
+        @media screen and (max-width: 678px) {
+            .carousel .list .items .content {
+                padding-right: 0;
+            }
+
+            .carousel .list .item .content .title {
+                font-size: 30px;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <header>
+
+    <!--    <h2 class="logo">YOUR LOGO</h2>  -->
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+
+    </header>
+
+    <div class="carousel">
+        <div class="list">
+            <div class="items">
+                <img src="imgs/bmw.jpg">
+                <div class="content">
+                    <div class="author">BWM</div>
+                    <div class="title">BMW M4</div>
+                    <div class="topic">CAR</div>
+                    <div class="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident veritatis tempore nisi similique atque debitis officiis voluptatum, qui, sunt quasi aut adipisci itaque perferendis dolorum! Voluptatem, dolor! Natus, architecto excepturi?</div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items">
+                <img src="imgs/cheveleet.jpg">
+                <div class="content">
+                    <div class="author">CHEVROLET</div>
+                    <div class="title">Chevrolet Camaro</div>
+                    <div class="topic">CAR</div>
+                    <div class="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident veritatis tempore nisi similique atque debitis officiis voluptatum, qui, sunt quasi aut adipisci itaque perferendis dolorum! Voluptatem, dolor! Natus, architecto excepturi?</div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items">
+                <img src="imgs/lamborgini green.jpg">
+                <div class="content">
+                    <div class="author"><i>Lamborgini</i></div>
+                    <div class="title">Lamborgini Aventoder</div>
+                    <div class="topic">CAR</div>
+                    <div class="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident veritatis tempore nisi similique atque debitis officiis voluptatum, qui, sunt quasi aut adipisci itaque perferendis dolorum! Voluptatem, dolor! Natus, architecto excepturi?</div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items">
+                <img src="imgs/bugati.jpg">
+                <div class="content">
+                    <div class="author">Bugatti</div>
+                    <div class="title">Bugatti Veyron</div>
+                    <div class="topic">CAR</div>
+                    <div class="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident veritatis tempore nisi similique atque debitis officiis voluptatum, qui, sunt quasi aut adipisci itaque perferendis dolorum! Voluptatem, dolor! Natus, architecto excepturi?</div>
+                    <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="thumbnail">
+            
+            <div class="item">
+                <img src="imgs/cheveleet.jpg">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="des">
+                        Discription
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="imgs/lamborgini black.jpg">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="des">
+                        Discription
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="imgs/bugati.jpg">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="des">
+                        Discription
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="imgs/bmw drift.jpg">
+                <div class="content">
+                    <div class="title">
+                        Name Slider
+                    </div>
+                    <div class="des">
+                        Discription
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+
+        <div class="time"></div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            let nextDom = document.getElementById('next');
+            let prevDom = document.getElementById('prev');
+            let carouselDom = document.querySelector('.carousel');
+            let listItemDom = document.querySelector('.carousel .list');
+            let thumbnailDom = document.querySelector('.carousel .thumbnail');
+    
+            // Event listeners for next and previous buttons
+            nextDom.onclick = function() {
+                showSlider('next');
+            }
+            prevDom.onclick = function() {
+                showSlider('prev');
+            }
+    
+            // Time intervals for slider transition and auto-next
+            let timeRunning = 1000; // Time for slider transition
+            let timeAutoNext = 5000; // Time for automatic slider transition
+            let runTimeOut; // Variable to hold timeout for slider transition
+            let runAutoRun; // Variable to hold timeout for automatic slider transition
+    
+            // Function to handle slider transitions
+            function showSlider(type) {
+                let itemSlider = document.querySelectorAll('.carousel .list .items');
+                let thumbnail = document.querySelectorAll('.carousel .thumbnail .item');
+    
+                if (type === 'next') {
+                    // Move first item to end of list
+                    listItemDom.appendChild(itemSlider[0]);
+                    thumbnailDom.appendChild(thumbnail[0]);
+                    // Add class for next animation
+                    carouselDom.classList.add('next');
+                } else {
+                    // Move last item to start of list
+                    let positionLastItem = itemSlider.length - 1;
+                    listItemDom.prepend(itemSlider[positionLastItem]);
+                    thumbnailDom.prepend(thumbnail[positionLastItem]);
+                    // Add class for previous animation
+                    carouselDom.classList.add('prev');
+                }
+    
+                // Clear previous timeout and set new timeout to remove animation class
+                clearTimeout(runTimeOut);
+                runTimeOut = setTimeout(() => {
+                    carouselDom.classList.remove('next');
+                    carouselDom.classList.remove('prev');
+                }, timeRunning);
+    
+                // Clear previous auto-next timeout and set new timeout
+                clearTimeout(runAutoRun);
+                runAutoRun = setTimeout(() => {
+                    nextDom.click();
+                }, timeAutoNext);
+            }
+        });
+    </script>
+
+</body>
+</html>

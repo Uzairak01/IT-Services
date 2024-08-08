@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif ;
+        }
+
+        body{
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(65deg, #000000, #916de4);
+        }
+
+        .calculator{
+            border: 2px solid white;
+            padding: 12px;
+            border-radius: 16px;
+            background-color: rgb(70, 75, 77);
+            box-shadow: 0px 3px 12px rgba(255, 255, 255, 0.572);
+        }
+
+        input{
+            width: 280px;
+            height: 80px;
+            border: px solid rgb(255, 255, 255);
+            margin-bottom: 8px;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 40px;
+            background: transparent;
+            box-shadow: -0px -3px -12px rgba(255, 255, 255, 0.572);
+            color: #fff
+        }
+
+        button{
+            width: 60px;
+            height: 60px;
+            margin: 3px;
+            padding: 4px;
+            border: none;
+            border-radius: 40%;
+            font-size: larger;
+            cursor: pointer;
+            box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.396);
+        }
+
+        .ac{
+            background-color: yellow;
+            font-weight: 700;
+        }
+
+        .del{
+            background-color: yellow;
+            font-weight: 700;
+        }
+
+        .ans{
+            background-color: #f38b30;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" placeholder="0" id="inputBox">
+
+        <div class="botton1">
+            <button class="ac">AC</button>
+            <button class="del">DEL</button>
+            <button class="">/</button>
+            <button class="">%</button>
+        </div>
+        <div class="botton2">
+            <button class="">7</button>
+            <button class="">8</button>
+            <button class="">9</button>
+            <button class="">*</button>
+        </div>
+        <div class="botton3">
+            <button class="">4</button>
+            <button class="">5</button>
+            <button class="">6</button>
+            <button class="">-</button>
+        </div>
+        <div class="botton4">
+            <button class="">1</button>
+            <button class="">2</button>
+            <button class="">3</button>
+            <button class="">+</button>
+        </div>
+        <div class="botton5">
+            <button class="">00</button>
+            <button class="">0</button>
+            <button class="">.</button>
+            <button class="ans">=</button>
+        </div>
+    </div>
+
+    <script>
+        let input = document.getElementById('inputBox');
+        let buttons = document.querySelectorAll('button');
+        let stringForResult = "";
+        let arrButtons = Array.from(buttons);
+
+        arrButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                if(e.target.innerHTML == '=')
+                {
+                    stringForResult = eval(stringForResult);
+                    input.value = stringForResult;
+                }
+                else if(e.target.innerHTML == 'AC')
+                {
+                    stringForResult = "";
+                    input.value = stringForResult;
+                }
+                else if(e.target.innerHTML == 'DEL')
+                {
+                    stringForResult = stringForResult.substring(0, stringForResult.length-1);
+                    input.value = stringForResult;
+                }
+                else
+                {
+                    stringForResult += e.target.innerHTML;
+                    input.value = stringForResult;
+                }
+                
+            })
+        })
+    </script>
+</body>
+</html>

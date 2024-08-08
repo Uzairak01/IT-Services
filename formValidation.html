@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            color: #fff;
+        }
+
+        .container{
+            width: 100%;
+            height: 100vh;
+            background: url(Hadiths\ pics/walpaper-background.jpg) no-repeat;
+            background-size: cover;
+        }
+
+        .box{
+            width: 400px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 2px 2px 5px, -2px -2px 5px;
+            border-radius: 8px;
+            background: url(Hadiths\ pics/bubbles-wallpaper.jpg)no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(6px);
+            padding: 20px 40px;
+        }
+
+        .signup-header h1{
+            font-size: 2.2rem;
+            text-align: center;
+            padding: 5px 8px;
+        }
+
+        .signup-body p{
+            margin-top: 20px;
+        }
+
+        .signup-body p label{
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .signup-body p input{
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 500;
+            border-top: none;
+            border-bottom : 2px solid #fff;
+            margin-block: 4px;
+            outline: none;
+            background-color: transparent;
+            backdrop-filter: blur(8px);
+            color: #fff;
+        }
+
+        .signup-body p input::placeholder{
+            color: #ffffffa3;
+        }
+
+        .signup-body p span{
+            font-weight: 600;
+            color: rgba(255, 255, 0, 0.836);
+        }
+
+        .signup-body p input[type="submit"]{
+            border: 2px solid #fff;
+            text-shadow: 2px 2px 5px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .4s ease;
+        }
+
+        .signup-body p input[type="submit"]:hover{
+            transform: scale(1.1);
+            color: #000;
+            background-color: #fff;
+        }
+
+        .signup-footer p{
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .signup-footer a{
+            text-decoration: none;
+        }
+
+        .signup-footer a:hover{
+            text-decoration: underline;
+            color: rgb(82, 255, 47);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="box">
+            <header class="signup-header">
+                <h1>Signup</h1>
+            </header>
+
+            <main class="signup-body">
+
+                <form action="#">
+                    <p>
+                        <label for="name">Name</label>
+                        <input type="text" placeholder="User Name" id="name" required>
+                        <span id="nameError"></span>
+                    </p>
+                    <p>
+                        <label for="email">Email</label>
+                        <input type="email" placeholder="abc@info.com" id="email" required>
+                    </p>
+                    <p>
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Enter Password" id="password" required minlength="8" maxlength="20">
+                    </p>
+
+                    <p>
+                        <input type="submit" value="Create Account" id="submitBtn">
+                    </p>
+                </form>
+
+            </main>
+
+            <footer class="signup-footer">
+                <p>
+                    Aready have an Account? <a href="#">Login</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+
+        const nameError = document.getElementsById('nameError');
+        const submitBtn = document.getElementById('submitBtn');
+
+        submitBtn.addEventListener('click', (e)=>{
+            e.preventDefault();
+
+            if(validateName()){
+                alert("Account created successfuly!");
+            }
+        });
+
+        function validateName(){
+            let name = document.getElementById('name').value;
+
+            if(name.length == 0){
+                nameError.innerHTML = "User Name is required!";
+                return false;         
+            }
+            nameError.innerHTML = "";
+            return true;
+        }
+
+    </script>
+</body>
+</html>
