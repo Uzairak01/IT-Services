@@ -1,3 +1,3 @@
 # IT services
 <br>
-This an It services Front end disign coded. 
+This an It services Front end design coded. 
