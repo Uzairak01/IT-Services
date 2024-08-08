@@ -1,3 +1,3 @@
-# IT services
+# My projects as a beginner
 <br>
-This an It services Front end design coded. 
+These are the projects that i made during learning HMTL, CSS, JavaScript. 
